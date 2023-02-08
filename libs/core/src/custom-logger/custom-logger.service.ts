@@ -1,9 +1,9 @@
-import { Injectable, Logger, Scope } from '@nestjs/common';
+import { ConsoleLogger, Injectable, Scope } from '@nestjs/common';
 import { RequestContext } from './request-context';
 
 @Injectable({ scope: Scope.REQUEST })
-export class CustomLoggerService extends Logger {
-  constructor(private req: RequestContext, context?: string) {
+export class CustomLoggerService extends ConsoleLogger {
+  constructor(private req?: RequestContext, context?: string) {
     super(context);
   }
 
@@ -16,7 +16,7 @@ export class CustomLoggerService extends Logger {
   }
 
   private get reqContext(): string {
-    return this.req.context ? this.req.context.id : '';
+    return this.req && this.req.context ? this.req.context.id : '';
   }
 
   private getContext(context?: string): string {
