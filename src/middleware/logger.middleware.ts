@@ -9,8 +9,8 @@ export class LoggerMiddleware implements NestMiddleware {
   constructor(private readonly logger: CustomLoggerService) {}
 
   public use(req: CustomRequest, res: Response, next: () => void): void {
-    req.id = req.header('X-Request-Id') || nanoid();
-    res.setHeader('X-Request-Id', req.id);
+    req.id = req.header('x-Request-Id') || nanoid();
+    res.setHeader('x-Request-Id', req.id);
     this.logger.log(`${req.method} ${req.originalUrl}`);
     return next();
   }

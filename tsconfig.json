@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "commonJS",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -25,5 +25,6 @@
         "libs/core/src/*"
       ]
     },
+    "resolveJsonModule": true
   },
 }
