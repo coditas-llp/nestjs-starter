@@ -1,4 +1,5 @@
 import { User } from '@app/user/user.entity';
+import * as path from 'path';
 import { DataSourceOptions } from 'typeorm';
 import { defaults } from './defaults';
 import { AppConfigs } from './type/app-config.enum';
@@ -30,7 +31,12 @@ export class ConfigService {
     return this.getValue(AppConfigs.NODE_ENV) === Environments.PRODUCTION;
   }
 
-  static getOrmConfig(connectionName = 'default'): DataSourceOptions {
+  static getOrmConfig(
+    connectionName = 'default',
+    migrationsRun = false,
+  ): DataSourceOptions {
+    const migrationDir = path.join(__dirname, '/../migration/*.{js,ts}');
+
     return {
       name: connectionName,
       type: 'postgres',
@@ -42,10 +48,10 @@ export class ConfigService {
       ssl: this.isProduction(),
       logging: true,
       //   logger: new OrmCustomLogger(true),
-      migrationsRun: true,
+      migrationsRun,
       entities: [User],
-      migrations: [],
-      synchronize: true,
+      migrations: [migrationDir],
+      synchronize: false,
     };
   }
 }

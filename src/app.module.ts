@@ -34,7 +34,7 @@ import { ResponseInterceptor } from './middleware/response.interceptor';
 })
 export class AppModule {
   constructor() {
-    // this.runMigrations();
+    this.runMigrations();
   }
 
   configure(consumer: MiddlewareConsumer) {
@@ -43,15 +43,17 @@ export class AppModule {
 
   async runMigrations() {
     /**
-     * TO Run DB migrations with the code
-     * get the error if the migration is failed
+     * NOTE: To Run DB migrations with the code
+     * Get the error if the migration is failed
      */
-    const options = ConfigService.getOrmConfig('migration_datasource');
+    const options = ConfigService.getOrmConfig('migration_connection', true);
     const connection = new DataSource(options);
     await connection.initialize();
     try {
       await connection.runMigrations();
     } catch (error) {
+      // Catch any error in case any migration fails
+      console.log(JSON.stringify(error));
     } finally {
       await connection.destroy();
     }

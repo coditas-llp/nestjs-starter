@@ -12,5 +12,15 @@
   "javascript.format.insertSpaceAfterSemicolonInForStatements": true,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
   "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active"
+  "editor.guides.bracketPairs": "active",
+  "todohighlight.keywords": [
+    "DEBUG:",
+    "REVIEW:",
+    {
+      "text": "NOTE:",
+      "color": "yellow",
+      "backgroundColor": "green"
+    }
+  ],
+  "cSpell.words": ["typeorm"]
 }
