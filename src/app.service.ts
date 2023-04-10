@@ -8,6 +8,6 @@ export class AppService {
 
   getHealthStatus(): HealthStatusDTO {
     this.customLoggerService.log('Inside getHealthStatus function');
-    return { data: 'Apis are working!' };
+    return { message: 'Apis are working!' };
   }
 }

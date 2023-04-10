@@ -6,7 +6,6 @@ import { AuthRequestDTO } from './dto/auth.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  // @UseGuards(JwtAuthGuard)
   @Post('auth/login')
   async login(@Body() body: AuthRequestDTO) {
     return this.authService.login(body);

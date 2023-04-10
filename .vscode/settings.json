@@ -22,5 +22,5 @@
       "backgroundColor": "green"
     }
   ],
-  "cSpell.words": ["typeorm"]
+  "cSpell.words": ["datasource", "nestjs", "typeorm"]
 }

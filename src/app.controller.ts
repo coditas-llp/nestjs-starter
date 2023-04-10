@@ -18,7 +18,7 @@ export class AppController {
   @ApiOkResponse({ type: HealthStatusDTO })
   @HttpCode(HttpStatus.OK)
   @Get('health-status')
-  getHello(): HealthStatusDTO {
+  getHealthStatus(): HealthStatusDTO {
     return this.appService.getHealthStatus();
   }
 
