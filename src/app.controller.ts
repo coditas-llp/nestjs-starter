@@ -1,6 +1,13 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { JwtAuthGuard } from '@app/user/auth/guard/jwt.guard';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { HealthStatusDTO } from './dto/health-status.dto';
 
 @ApiTags()
@@ -11,7 +18,14 @@ export class AppController {
   @ApiOkResponse({ type: HealthStatusDTO })
   @HttpCode(HttpStatus.OK)
   @Get('health-status')
-  getHello(): HealthStatusDTO {
+  getHealthStatus(): HealthStatusDTO {
     return this.appService.getHealthStatus();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @Get('test-jwt')
+  async login() {
+    return { test: 'JWT test success' };
   }
 }

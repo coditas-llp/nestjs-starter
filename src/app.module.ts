@@ -1,16 +1,61 @@
 import { CoreModule } from '@app/core/core.module';
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { UserModule } from '@app/user';
+import { MiddlewareConsumer, Module, Scope } from '@nestjs/common';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AppConfigModule } from './config/config.module';
+import { ConfigService } from './config/config.service';
+import { HttpErrorFilter } from './filter/error.filter';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { RequestInterceptor } from './middleware/request.interceptor';
+import { ResponseInterceptor } from './middleware/response.interceptor';
 
 @Module({
-  imports: [CoreModule],
+  imports: [AppConfigModule, CoreModule, UserModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      scope: Scope.REQUEST,
+      useClass: RequestInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter,
+    },
+  ],
 })
 export class AppModule {
+  constructor() {
+    this.runMigrations();
+  }
+
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+
+  async runMigrations() {
+    /**
+     * NOTE: To Run DB migrations with the code
+     * Get the error if the migration is failed
+     */
+    const options = ConfigService.getOrmConfig('migration_connection', true);
+    const connection = new DataSource(options);
+    await connection.initialize();
+    try {
+      await connection.runMigrations();
+    } catch (error) {
+      // Catch any error in case any migration fails
+      console.log(JSON.stringify(error));
+    } finally {
+      await connection.destroy();
+    }
   }
 }
