@@ -6,7 +6,17 @@ describe('CustomLoggerService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CustomLoggerService],
+      providers: [
+        {
+          provide: CustomLoggerService,
+          useValue: {
+            log: jest.fn(),
+            error: jest.fn(),
+            getContext: jest.fn(),
+            prefixContext: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<CustomLoggerService>(CustomLoggerService);
