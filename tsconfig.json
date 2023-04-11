@@ -18,18 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/core": [
-        "libs/core/src"
-      ],
-      "@app/core/*": [
-        "libs/core/src/*"
-      ],
-      "@app/user": [
-        "libs/user/src"
-      ],
-      "@app/user/*": [
-        "libs/user/src/*"
-      ]
+      "@app/core": ["libs/core/src"],
+      "@app/core/*": ["libs/core/src/*"],
+      "@app/user": ["libs/user/src"],
+      "@app/user/*": ["libs/user/src/*"]
     },
     "resolveJsonModule": true
   }

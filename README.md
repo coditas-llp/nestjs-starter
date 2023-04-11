@@ -1,36 +1,60 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Coditas NestJS Starter
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. The application is generated using nest cli v9.1.9.
+
+# Features 
+* TypeORM and PostgreSQL Integration
+* Basic JWT Authentication
+* Swagger API Documentation
+* Request/Response Interceptors and Error Filters
+* Jest Unit testing along with some starter code templates in the respective spec. files
+* Husky hooks for building app before commit and various vscode extensions
+* Custom Logger
 
 ## Installation
 
 ```bash
 $ npm install
 ```
+
+## Install Husky
+
+```bash
+$ npm run prepare
+```
+## Generate and Running the TypeORM Migrations
+
+* To show migrations with pending or completed status
+        
+    ```bash
+    $ npm run migration:show
+    ```
+
+* To create an empty migration file
+
+    ```bash
+    $ npm run migration:create --name=<file-name>
+    ```
+
+* To auto generate SQL for entity changes
+
+    ```bash
+    $ npm run migration:generate --name=<file-name>
+    ```
+
+* To run migrations on DB
+
+    ```bash
+    $ npm run migration:run
+    ```
+
+* To revert migration from DB
+    
+    ```bash
+    $ npm run migration:revert
+    ```
 
 ## Running the app
 
@@ -45,6 +69,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+
+## App will start on the port you mentioned in .env file or 3333
+
+    http://localhost:3333/api/
+
+* #### You will see the Swagger API documentation on above link
+## Build Application
+
+```bash
+$ npm run build
+```
 ## Test
 
 ```bash
@@ -57,17 +92,144 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Utility Commands
 
-## Support
+### Format
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+$ npm run format
+```
 
-## Stay in touch
+### Lint
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash 
+$ npm run lint
+```
 
-## License
+### Prettier
 
-Nest is [MIT licensed](LICENSE).
+```bash 
+$ npm run prettier
+```
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+* APP_PORT=<nest_app_port>
+* DATABASE_HOST=<postgres_db_host>
+* DATABASE_PORT=<postgres_db_port>
+* DATABASE_USERNAME=<postgres_db_username>
+* DATABASE_PASSWORD=<postgres_db_password>
+* DATABASE_NAME=<postgres_db_name>
+
+## Application Folder Structure
+
+```
+.env.ref
+.eslintrc.js
+.gitignore
+.husky
+   |-- post-merge
+   |-- pre-commit
+.prettierrc
+.vscode
+   |-- settings.json
+README.md
+libs
+   |-- core
+   |   |-- src
+   |   |   |-- core.module.ts
+   |   |   |-- core.service.spec.ts
+   |   |   |-- core.service.ts
+   |   |   |-- custom-logger
+   |   |   |   |-- custom-logger.module.ts
+   |   |   |   |-- custom-logger.service.spec.ts
+   |   |   |   |-- custom-logger.service.ts
+   |   |   |   |-- index.ts
+   |   |   |   |-- interface
+   |   |   |   |   |-- request.interface.ts
+   |   |   |   |-- request-context.ts
+   |   |   |-- index.ts
+   |   |-- tsconfig.lib.json
+   |-- user
+   |   |-- src
+   |   |   |-- auth
+   |   |   |   |-- auth.controller.spec.ts
+   |   |   |   |-- auth.controller.ts
+   |   |   |   |-- auth.module.ts
+   |   |   |   |-- auth.service.spec.ts
+   |   |   |   |-- auth.service.ts
+   |   |   |   |-- dto
+   |   |   |   |   |-- auth.dto.ts
+   |   |   |   |-- guard
+   |   |   |   |   |-- jwt.guard.ts
+   |   |   |   |-- jwt.strategy.ts
+   |   |   |-- index.ts
+   |   |   |-- user.entity.ts
+   |   |   |-- user.module.ts
+   |   |   |-- user.service.spec.ts
+   |   |   |-- user.service.ts
+   |   |-- tsconfig.lib.json
+nest-cli.json
+package-lock.json
+package.json
+src
+   |-- app.controller.spec.ts
+   |-- app.controller.ts
+   |-- app.module.ts
+   |-- app.service.spec.ts
+   |-- app.service.ts
+   |-- config
+   |   |-- config.module.ts
+   |   |-- config.service.spec.ts
+   |   |-- config.service.ts
+   |   |-- constants.ts
+   |   |-- defaults.ts
+   |   |-- type
+   |   |   |-- app-config.enum.ts
+   |   |   |-- environments.enum.ts
+   |   |   |-- index.ts
+   |-- dto
+   |   |-- health-status.dto.ts
+   |-- filter
+   |   |-- error.filter.ts
+   |-- main.ts
+   |-- middleware
+   |   |-- logger.middleware.ts
+   |   |-- request.interceptor.ts
+   |   |-- response.interceptor.ts
+   |-- migration
+   |   |-- 1680672297456-created-user-table.ts
+test
+   |-- app.e2e-spec.ts
+   |-- jest-e2e.json
+tsconfig.build.json
+tsconfig.json
+typeorm-datasource.config.ts
+```
+
+## Modules & Libraries
+
+#### libs/core - Core features library
+
+* /src - Core module and service
+    * /custom-logger - Custom Logger module
+        * /interface - Interfaces related to Custom Logger
+
+#### libs/user - User authentication library
+
+* /src - User module, entity and service
+    * /auth - User authentication module with JWT strategy and guard
+        * /dto - DTOs related to authentication endpoints
+        * /guard - Authentication JWT guard
+
+#### src - App. level modules/services/configurations
+
+* /config - DB configurations
+* /dto - DTOs for app level endpoints
+* /filter - App level filters such as error filter
+* /middleware - Middleware/Interceptors such as request, response & logger
+* /migration - TypeORM migrations directory
+
+#### test - e2e testing 
+
