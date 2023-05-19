@@ -25,7 +25,7 @@ export class User {
   password: string;
 
   @Column()
-  roleId!: string;
+  roleId!: number;
   @OneToOne(() => Role, ({ id }) => id)
   @JoinColumn({ name: 'roleId' })
   role: Role;
