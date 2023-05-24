@@ -1,3 +1,4 @@
+import { Role } from '@app/user/role/entities/role.entity';
 import { User } from '@app/user/user.entity';
 import * as path from 'path';
 import { DataSourceOptions } from 'typeorm';
@@ -49,7 +50,7 @@ export class ConfigService {
       logging: true,
       //   logger: new OrmCustomLogger(true),
       migrationsRun,
-      entities: [User],
+      entities: [User, Role],
       migrations: [migrationDir],
       synchronize: false,
     };

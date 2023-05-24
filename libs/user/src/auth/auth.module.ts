@@ -11,9 +11,11 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({
-      secret: 'secret',
-      signOptions: { expiresIn: '1d' },
+    JwtModule.registerAsync({
+      useFactory: async () => ({
+        secret: process.env.JWT_SECRET,
+        signOptions: { expiresIn: process.env.JWT_TOKEN_EXPIRY },
+      }),
     }),
     TypeOrmModule.forFeature([User]),
   ],
@@ -21,4 +23,4 @@ import { JwtStrategy } from './jwt.strategy';
   exports: [AuthService],
   controllers: [AuthController],
 })
-export class AuthModule {}
+export class AuthModule { }
