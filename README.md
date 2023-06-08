@@ -164,7 +164,23 @@ libs
    |   |   |   |-- guard
    |   |   |   |   |-- jwt.guard.ts
    |   |   |   |-- jwt.strategy.ts
+   |   |   |-- dto
+   |   |   |   |-- create-user-request.dto.ts
+   |   |   |   |-- update-user-request.dto.ts
    |   |   |-- index.ts
+   |   |   |-- role
+   |   |   |   |-- dto
+   |   |   |   |   |-- create-role.dto.ts
+   |   |   |   |   |-- update-role.dto.ts
+   |   |   |   |-- entities
+   |   |   |   |   |-- role.entity.ts
+   |   |   |   |-- role.controller.spec.ts
+   |   |   |   |-- role.controller.ts
+   |   |   |   |-- role.module.ts
+   |   |   |   |-- role.service.spec.ts
+   |   |   |   |-- role.service.ts
+   |   |   |-- user.controller.spec.ts
+   |   |   |-- user.controller.ts
    |   |   |-- user.entity.ts
    |   |   |-- user.module.ts
    |   |   |-- user.service.spec.ts
@@ -200,6 +216,9 @@ src
    |   |-- response.interceptor.ts
    |-- migration
    |   |-- 1680672297456-created-user-table.ts
+   |   |-- 1684485201240-added-new-columns-in-user-table.ts
+   |   |-- 1684487478381-added-unique-key-to-user-email.ts
+   |   |-- 1684488658021-added-role-entity.ts
 test
    |-- app.e2e-spec.ts
    |-- jest-e2e.json
